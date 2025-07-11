@@ -419,15 +419,16 @@ const result = () => {
         }
         cekDouble = 0
     }
-    resultText.innerHTML += `<br>`
     input.value = ''
     if(benar === 5){
         victory.style.display = 'flex'
+        message.innerText = "You win!"
         return
     }
     if(healthPoint === 0){
         lose.style.display = 'flex'
         retryBtn.innerText = `Correct answer : ${quiz.toUpperCase()}. Click to try again.`
+        message.innerText = "You lose!"
         return
     }
 }
@@ -460,6 +461,7 @@ const reset = () => {
     }
     victory.style.display = 'none'
     lose.style.display = 'none'
+    message.innerText = ''
     randomNumber = Math.floor(Math.random() * fiveLetterWords.length)
 }
 
