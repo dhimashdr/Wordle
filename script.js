@@ -7,6 +7,7 @@ const lose = document.getElementById('lose')
 let healthPoint = 6
 const nextBtn = document.getElementById('nextBtn')
 const retryBtn = document.getElementById('retryBtn')
+const message = document.getElementById('message')
 
 const fiveLetterWords = [
   "aback",
@@ -2329,15 +2330,16 @@ let randomNumber = Math.floor(Math.random() * fiveLetterWords.length)
 
 health.innerText = healthPoint
 const result = () => {
+    message.innerText = ''
     if(input.value.length < 5){
-        alert("Please input 5 length word")
+        message.innerText = "Please input 5 length word"
         return
     } else if(fiveLetterWords.includes(input.value.toLowerCase()) === false) {
-        alert("Please input proper word")
+        message.innerText = "Please input proper word"
         return
     }
     if(healthPoint === 0){
-        alert('You lose!')
+        message.innerText = "You already lose!"
         return
     }
 
@@ -2400,7 +2402,7 @@ input.addEventListener('keydown', (e) => {
 })
 
 const reset = () => {
-    healthPoint = 5
+    healthPoint = 6
     health.innerText = healthPoint
     for(let i = 0; i < 5; i++){
         document.getElementById(`box${i+1}`).innerHTML = ''
