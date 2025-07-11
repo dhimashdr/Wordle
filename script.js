@@ -9,6 +9,7 @@ const nextBtn = document.getElementById('nextBtn')
 const retryBtn = document.getElementById('retryBtn')
 const message = document.getElementById('message')
 
+
 const fiveLetterWords = [
   "aback",
   "abase",
@@ -51,6 +52,7 @@ const fiveLetterWords = [
   "aging",
   "aglow",
   "agony",
+  "agora",
   "agree",
   "ahead",
   "aider",
@@ -736,6 +738,7 @@ const fiveLetterWords = [
   "fever",
   "fewer",
   "fiber",
+  "fibre",
   "ficus",
   "field",
   "fiend",
@@ -886,6 +889,7 @@ const fiveLetterWords = [
   "glove",
   "glyph",
   "gnash",
+  "gnat",
   "gnome",
   "godly",
   "going",
@@ -1185,6 +1189,7 @@ const fiveLetterWords = [
   "lusty",
   "lying",
   "lymph",
+  "lynch",
   "lyric",
   "macaw",
   "macho",
@@ -1787,6 +1792,7 @@ const fiveLetterWords = [
   "slant",
   "slash",
   "slate",
+  "slave",
   "sleek",
   "sleep",
   "sleet",
@@ -2254,6 +2260,7 @@ const fiveLetterWords = [
   "weird",
   "welch",
   "welsh",
+  "wench",
   "whack",
   "whale",
   "wharf",
