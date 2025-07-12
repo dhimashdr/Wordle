@@ -2,13 +2,17 @@ const wordBtn = document.getElementById('wordBtn')
 const input = document.getElementById('wordInput')
 const resultText = document.getElementById('result')
 const health = document.getElementById('health')
-const victory = document.getElementById('victory')
-const lose = document.getElementById('lose')
-let healthPoint = 6
-const nextBtn = document.getElementById('nextBtn')
-const retryBtn = document.getElementById('retryBtn')
 const message = document.getElementById('message')
+const resetBtn = document.getElementById('resetBtn')
+const resetBtn1 = document.getElementById('resetBtn1')
+const menang = document.getElementById('menang')
+const kalah = document.getElementById('kalah')
+const correctSum = document.getElementById('correctSum')
+const wrongSum = document.getElementById('wrongSum')
 
+let healthPoint = 6
+let correctTimes = 0
+let wrongTimes = 0
 
 const fiveLetterWords = [
     'about', 'above', 'abuse', 'actor', 'acute', 'admit', 'adopt', 'adult',
@@ -380,6 +384,8 @@ const validationWords = [
 let randomNumber = Math.floor(Math.random() * fiveLetterWords.length)
 
 health.innerText = healthPoint
+correctSum.innerText = correctTimes
+wrongSum.innerText = wrongTimes
 const result = () => {
     message.innerText = ''
     if(input.value.length < 5){
@@ -393,12 +399,11 @@ const result = () => {
         message.innerText = "You already lose!"
         return
     }
-
-    const quiz = fiveLetterWords[randomNumber]
     
     healthPoint -= 1
     health.innerText = healthPoint
 
+    const quiz = fiveLetterWords[randomNumber]
     let benar = 0
     let cekDouble = 0
     for(let i = 0; i < 5; i++){
@@ -421,14 +426,24 @@ const result = () => {
     }
     input.value = ''
     if(benar === 5){
-        victory.style.display = 'flex'
-        message.innerText = "You win!"
+        menang.style.display = 'flex'
+        correctTimes += 1
+        correctSum.innerText = correctTimes
         return
     }
     if(healthPoint === 0){
-        lose.style.display = 'flex'
-        retryBtn.innerText = `Correct answer : ${quiz.toUpperCase()}. Click to try again.`
-        message.innerText = "You lose!"
+        kalah.style.display = 'flex'
+        let i = 0
+        const reveal = () => {
+            if(i < 5){
+                document.getElementById(`g${i+1}`).innerHTML = answer(quiz[i])
+                i++
+            }
+            setTimeout(reveal, 100)
+        }
+        setTimeout(reveal, 300)
+        wrongTimes += 1
+        wrongSum.innerText = wrongTimes
         return
     }
 }
@@ -445,6 +460,10 @@ const wrong = (char) => {
     return `<div class="bg-red-700 h-10 w-10 rounded-sm flex mx-0.5 my-1"><p class="my-auto mx-auto">${char.toUpperCase()}</p></div>`
 }
 
+const answer = (char) => {
+    return `<div class="bg-green-600 h-10 w-10 rounded-sm flex"><p class="my-auto mx-auto">${char.toUpperCase()}</p></div>`
+}
+
 wordBtn.addEventListener('click', result)
 
 input.addEventListener('keydown', (e) => {
@@ -458,12 +477,13 @@ const reset = () => {
     health.innerText = healthPoint
     for(let i = 0; i < 5; i++){
         document.getElementById(`box${i+1}`).innerHTML = ''
+        document.getElementById(`g${i+1}`).innerHTML = ''
     }
-    victory.style.display = 'none'
-    lose.style.display = 'none'
+    menang.style.display = 'none'
+    kalah.style.display = 'none'
     message.innerText = ''
     randomNumber = Math.floor(Math.random() * fiveLetterWords.length)
 }
 
-nextBtn.addEventListener('click', reset)
-retryBtn.addEventListener('click', reset)
+resetBtn.addEventListener('click', reset)
+resetBtn1.addEventListener('click', reset)
