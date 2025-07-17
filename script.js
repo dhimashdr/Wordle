@@ -429,6 +429,7 @@ const result = () => {
         menang.style.display = 'flex'
         correctTimes += 1
         correctSum.innerText = correctTimes
+        isOver = true
         return
     }
     if(healthPoint === 0){
@@ -439,11 +440,12 @@ const result = () => {
                 document.getElementById(`g${i+1}`).innerHTML = answer(quiz[i])
                 i++
             }
-            setTimeout(reveal, 100)
+            setTimeout(reveal, 1)
         }
-        setTimeout(reveal, 300)
+        setTimeout(reveal, 1)
         wrongTimes += 1
         wrongSum.innerText = wrongTimes
+        isOver = true
         return
     }
 }
@@ -466,9 +468,14 @@ const answer = (char) => {
 
 wordBtn.addEventListener('click', result)
 
+let isOver = false
+
 input.addEventListener('keydown', (e) => {
-    if(e.key === 'Enter'){
+    if(e.key === 'Enter' && isOver === false){
         result()
+    } else if(e.key === 'Enter' && isOver === true) {
+        isOver = false
+        reset()
     }
 })
 
